@@ -2,6 +2,7 @@ package com.peter.xiao.main.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.peter.xiao.annotation.Jwt;
 import com.peter.xiao.main.entity.UploadFile;
 import com.peter.xiao.main.service.IUploadFileService;
 import com.peter.xiao.main.service.IUserService;

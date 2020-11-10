@@ -6,21 +6,6 @@ spring:
     url: jdbc:mysql://cdb-lx88tlpe.bj.tencentcdb.com:10264/peter?autoReconnect=true&characterEncoding=utf8&useSSL=false&zeroDateTimeBehavior=convertToNull
     username: root
     password: Ch@ng010103
-    initialSize: 5
-    minIdle: 5
-    maxActive: 20
-    maxWait: 60000
-    timeBetweenEvictionRunsMillis: 60000
-    minEvictableIdleTimeMillis: 300000
-    validationQuery: SELECT 1 FROM DUAL
-    testWhileIdle: true
-    testOnBorrow: false
-    testOnReturn: false
-    poolPreparedStatements: true
-    filters: stat,wall
-    maxPoolPreparedStatementPerConnectionSize: 20
-    useGlobalDataSourceStat: true
-    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
   mvc:
     view:
       suffix: .html
@@ -36,6 +21,7 @@ spring:
 mybatis-plus:
   type-aliases-package: com.peter.xiao.main.entity
   mapper-locations: classpath:/com/peter/xiao/main/mapper/xml/*.xml
+
 err:
   file: err.log
   head: logs

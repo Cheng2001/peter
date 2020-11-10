@@ -1,6 +1,7 @@
 package com.peter.xiao.main.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.peter.xiao.annotation.Jwt;
 import com.peter.xiao.main.entity.User;
 import com.peter.xiao.main.service.IUserService;
 import org.springframework.web.bind.annotation.*;
@@ -63,6 +64,7 @@ public class UserController {
    * @param user 注册的用户
    * @return 返回信息
    */
+  @Jwt
   @CrossOrigin
   @PostMapping("/register")
   public Map<String, Object> register(User user) {
@@ -85,6 +87,7 @@ public class UserController {
         return returnMessage;
       }
     }
+    System.out.println(user);
     // 注册成功后返回该信息
     returnMessage.put("code", 200);
     returnMessage.put("data", user);
