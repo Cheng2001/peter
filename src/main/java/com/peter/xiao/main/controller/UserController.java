@@ -3,6 +3,7 @@ package com.peter.xiao.main.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.peter.xiao.annotation.Jwt;
 import com.peter.xiao.main.entity.User;
+import com.peter.xiao.main.exceptionlog.ResultData;
 import com.peter.xiao.main.service.IUserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,23 +12,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <p>
  * 前端控制器
- * </p>
  *
  * @author Eweee
  * @since 2020-09-08
  */
-
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
-  /**
-   * 用户service层操作对象
-   */
-  @Resource
-  IUserService userService;
+  /** 用户service层操作对象 */
+  @Resource IUserService userService;
 
   /**
    * 登录
@@ -38,7 +33,8 @@ public class UserController {
    */
   @CrossOrigin
   @GetMapping("/login")
-  public Map<String, Object> login(@RequestParam("username") String username, @RequestParam("password") String password) {
+  public Map<String, Object> login(
+      @RequestParam("username") String username, @RequestParam("password") String password) {
     // 定义返回的map
     Map<String, Object> returnMessage = new HashMap<>();
     // 定义条件构造器
@@ -94,4 +90,9 @@ public class UserController {
     return returnMessage;
   }
 
+  @GetMapping("test")
+  @Jwt
+  public Integer showUserId(@RequestAttribute Integer userId) {
+    return userId;
+  }
 }

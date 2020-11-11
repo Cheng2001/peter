@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * @author Eweee
  */
-@SpringBootApplication(scanBasePackages = "com.peter.xiao.main")
+@SpringBootApplication(scanBasePackages = "com.peter.xiao")
 @MapperScan("com.peter.xiao.main.mapper")
 public class XiaoApplication {
 

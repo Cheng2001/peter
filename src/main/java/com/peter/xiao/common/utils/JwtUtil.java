@@ -6,7 +6,13 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
+import javax.servlet.http.HttpSession;
+import javax.xml.bind.DatatypeConverter;
+import javax.xml.crypto.Data;
 import java.util.Date;
 
 /**
@@ -17,12 +23,15 @@ public class JwtUtil {
   /**
    * 定义过期时间
    */
-  public static final long EXPIRATION_TIME = 30 * 60 * 1000;
+  private static final long EXPIRATION_TIME = 30 * 60 * 1000;
+
+  /** 签发者 */
+  private static String ISSUER = "daiAdmin";
 
   /**
    * jwt密钥
    */
-  public static final String SERCET = "UhjIrUa*JiWCEPGQkX0E*Q%PUFS%v5rW";
+  private static final String SERCET = "UhjIrUa*JiWCEPGQkX0E*Q%PUFS%v5rW";
 
   /**
    * 获得token
@@ -33,11 +42,22 @@ public class JwtUtil {
   public static String sign(Integer userId) {
     try {
       // 设置过期时间
-      Date date = new Date(System.currentTimeMillis() + EXPIRATION_TIME);
+      Long expirationTime = System.currentTimeMillis() + EXPIRATION_TIME;
       // 加密算法
-      Algorithm algorithm = Algorithm.HMAC256(SERCET);
-      // 反或token
-      return JWT.create().withAudience(String.valueOf(userId)).withExpiresAt(date).sign(algorithm);
+      SignatureAlgorithm sign = SignatureAlgorithm.HS256;
+      // 获得byte数组的密钥
+      byte[] secretBytes = DatatypeConverter.parseBase64Binary(SERCET);
+      String enUserId = EncryptUtils.aesEncrypt(String.valueOf(userId));
+      // 创建JWT工厂
+      JwtBuilder jwtBuilder =
+          Jwts.builder()
+              .setIssuer(ISSUER)
+              .setExpiration(new Date(expirationTime))
+              .setIssuedAt(new Date())
+              .setAudience(enUserId)
+              .signWith(sign,secretBytes);
+      // 返回token
+      return jwtBuilder.compact();
     } catch (Exception e) {
       // 出现异常返回null
       return null;
@@ -54,8 +74,12 @@ public class JwtUtil {
     try {
       // 获得用户id
       String userId = JWT.decode(token).getAudience().get(0);
-      return Integer.parseInt(token);
+      userId = EncryptUtils.aesDecrypt(userId);
+      return Integer.parseInt(userId);
     } catch (JWTDecodeException e) {
+      return null;
+    } catch (Exception e) {
+      e.printStackTrace();
       return null;
     }
   }
@@ -76,10 +100,9 @@ public class JwtUtil {
     }
   }
 
-
   public static void main(String[] args) {
-    String token = sign(1222);
-    System.out.println();
-    Integer userId = getUserId(token);
+    Integer id = 222;
+    System.out.println(sign(222));
+    System.out.println(getUserId(sign(222)));
   }
 }
