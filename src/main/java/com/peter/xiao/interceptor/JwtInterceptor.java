@@ -17,8 +17,6 @@ import java.lang.reflect.Method;
 public class JwtInterceptor implements HandlerInterceptor {
   @Override
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-    System.err.println("进入拦截器" +
-        "");
     // 从 http 请求头中取出 token
     String token = request.getHeader("token");
     // 如果不是映射到方法直接通过

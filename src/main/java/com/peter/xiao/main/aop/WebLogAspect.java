@@ -31,6 +31,7 @@ public class WebLogAspect {
   public void logBeforeController(JoinPoint joinPoint) {
     // 这个类是SpringMVC提供来获取请求的东西
     RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+    assert requestAttributes != null;
     HttpServletRequest request = ((ServletRequestAttributes) requestAttributes).getRequest();
     // 记录下请求内容
     logger.info("");

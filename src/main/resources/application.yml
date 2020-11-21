@@ -1,11 +1,19 @@
 spring:
   datasource:
-    druid:
-    driver-class-name: com.mysql.jdbc.Driver
-    type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://cdb-lx88tlpe.bj.tencentcdb.com:10264/peter?autoReconnect=true&characterEncoding=utf8&useSSL=false&zeroDateTimeBehavior=convertToNull
-    username: root
-    password: Ch@ng010103
+    dynamic:
+      primary: master #设置默认的数据源或者数据源组,默认值即为master
+      strict: true #设置严格模式,默认false不启动. 启动后在未匹配到指定数据源时候会抛出异常,不启动则使用默认数据源.
+      datasource:
+        master:
+          url: jdbc:mysql://cdb-lx88tlpe.bj.tencentcdb.com:10264/peter?autoReconnect=true&characterEncoding=utf8&useSSL=false&zeroDateTimeBehavior=convertToNull
+          username: root
+          password: Ch@ng2001
+          driver-class-name: com.mysql.jdbc.Driver
+        sub:
+          url: jdbc:mysql://rm-8vb661b58so33mt83ho.mysql.zhangbei.rds.aliyuncs.com:3306/b2c_a_test?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=true&useAffectedRows=true&serverTimezone=GMT%2B8
+          username: b2c_a
+          password: b2c_a123456
+          driver-class-name: com.mysql.jdbc.Driver
   mvc:
     view:
       suffix: .html

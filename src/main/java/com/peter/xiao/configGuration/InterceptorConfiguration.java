@@ -6,9 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-/**
- * @author Administrator
- */
+/** @author Administrator */
 @Configuration
 public class InterceptorConfiguration implements WebMvcConfigurer {
   @Autowired JwtInterceptor jwtInterceptor;
