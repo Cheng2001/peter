@@ -28,7 +28,7 @@ public class CodeGenerator {
     // 获取当前项目根目录 无需更改
     String projectPath = System.getProperty("user.dir");
     // 所有的生成的包和类到此路径下
-    gc.setOutputDir(projectPath + "/src/main/java");
+    gc.setOutputDir("C:/Users/Administrator/Desktop/test" + "/src/main/java");
     // 开发人员名字 可忽略
     gc.setAuthor(generator.getAutor());
     // 是否打开输出目录，就是代码生成后是否打开文件夹的意思
@@ -60,7 +60,7 @@ public class CodeGenerator {
     // 创建业务层接口
     pc.setService("service");
     // 创建实现类
-    pc.setServiceImpl("serviceImpl");
+    pc.setServiceImpl("service.impl");
     // Mapper Dao层的意思
     pc.setMapper("mapper");
     // Controller 控制层
@@ -90,33 +90,6 @@ public class CodeGenerator {
           }
         });
 
-    /* //项目不需要的都注释掉
-    cfg.setFileCreate(new IFileCreate() {
-    @Override
-    public boolean isCreate(ConfigBuilder configBuilder, FileType fileType, String filePath) {
-    // 判断自定义文件夹是否需要创建
-    checkDir("调用默认方法创建的目录");
-    return false;
-    }
-    });
-    */
-    /*
-
-    cfg.setFileOutConfigList(focList);
-    mpg.setCfg(cfg);
-
-    // 配置模板
-    TemplateConfig templateConfig = new TemplateConfig();
-
-    // 配置自定义输出模板
-    //指定自定义模板路径，注意不要带上.ftl/.vm, 会根据使用的模板引擎自动识别
-    // templateConfig.setEntity("templates/entity2.java");
-    // templateConfig.setService();
-    // templateConfig.setController();
-
-    templateConfig.setXml(null);
-    mpg.setTemplate(templateConfig);
-    */
     // 策略配置
     StrategyConfig strategy = new StrategyConfig();
     strategy.setNaming(NamingStrategy.underline_to_camel);
@@ -127,8 +100,6 @@ public class CodeGenerator {
 
     // 公共父类
     // strategy.setSuperControllerClass("你自己的父类控制器,没有就不用设置!"); //因为 控制层不需要继承所以注释掉
-    // 写于父类中的公共字段
-    strategy.setSuperEntityColumns("id");
     strategy.setInclude(tableName);
     strategy.setControllerMappingHyphenStyle(true);
     strategy.setTablePrefix(pc.getModuleName() + "_");

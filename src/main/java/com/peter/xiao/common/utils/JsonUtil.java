@@ -34,9 +34,7 @@ public class JsonUtil {
    */
   public JsonUtil(String json) {
     this.json = json;
-    JsonParser jsonParser = new JsonParser();
-    JsonElement jsonElement = jsonParser.parse(json);
-    this.jsonObject = jsonElement.getAsJsonObject();
+    this.jsonObject = JsonParser.parseString(json).getAsJsonObject();
   }
 
   /**
