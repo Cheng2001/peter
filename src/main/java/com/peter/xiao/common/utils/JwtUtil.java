@@ -26,7 +26,7 @@ public class JwtUtil {
   private static final long EXPIRATION_TIME = 30 * 60 * 1000;
 
   /** 签发者 */
-  private static String ISSUER = "daiAdmin";
+  private static String ISSUER = "sjzt";
 
   /**
    * jwt密钥

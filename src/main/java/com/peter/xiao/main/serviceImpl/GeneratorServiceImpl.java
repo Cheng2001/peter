@@ -23,6 +23,7 @@ import java.util.Map;
 public class GeneratorServiceImpl extends ServiceImpl<GeneratorMapper, Generator> implements IGeneratorService {
 
   @Resource GeneratorMapper generatorMapper;
+
   /**
    * 查询数据库中表信息
    *

@@ -5,10 +5,14 @@ import com.peter.xiao.annotation.Jwt;
 import com.peter.xiao.main.entity.User;
 import com.peter.xiao.main.exceptionlog.ResultData;
 import com.peter.xiao.main.service.IUserService;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,6 +23,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/user")
+@PropertySource("classpath:application.yml")
 public class UserController {
 
   /** 用户service层操作对象 */
